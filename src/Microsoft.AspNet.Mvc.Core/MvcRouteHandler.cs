@@ -45,20 +45,9 @@ namespace Microsoft.AspNet.Mvc
 
             if (actionDescriptor == null)
             {
-                string currentRouteValues = string.Empty;
-                if (context.RouteData != null
-                    && context.RouteData.Values != null)
-                {
-                    currentRouteValues = string.Join(", ",
-                        context.RouteData.Values.Select(rv => $"Key={rv.Key};Value={rv.Value}"));
-                }
-
-                _logger.LogVerbose(
-                    $"No actions matched the current request. Current Route values: {currentRouteValues}");
+                _logger.LogVerbose("No actions matched the current request.");
                 return;
             }
-
-            _logger.LogVerbose("Action '{ActionName}' matched the request.", actionDescriptor.DisplayName);
 
             // Replacing the route data allows any code running here to dirty the route values or data-tokens
             // without affecting something upstream.
@@ -80,8 +69,13 @@ namespace Microsoft.AspNet.Mvc
             {
                 context.RouteData = newRouteData;
 
-                await InvokeActionAsync(context, actionDescriptor);
-                context.IsHandled = true;
+                using (_logger.BeginScope("ActionId: {ActionId}", actionDescriptor.Id))
+                {
+                    _logger.LogVerbose("Executing action {ActionDisplayName}", actionDescriptor.DisplayName);
+
+                    await InvokeActionAsync(context, actionDescriptor);
+                    context.IsHandled = true;
+                }
             }
             finally
             {
@@ -113,18 +107,7 @@ namespace Microsoft.AspNet.Mvc
                         actionDescriptor.DisplayName));
             }
 
-            var controllerActionDescriptor = actionDescriptor as ControllerActionDescriptor;
-            var controllerName = string.Empty;
-            if (controllerActionDescriptor != null)
-            {
-                controllerName = controllerActionDescriptor.ControllerTypeInfo.FullName;
-            }
-
-            using (_logger.BeginScope("Executing action '{ActionName}' on controller '{ControllerName}'.", 
-                actionDescriptor.Name, controllerName))
-            {
-                await invoker.InvokeAsync();
-            }
+            await invoker.InvokeAsync();
         }
 
         private void EnsureLogger(HttpContext context)

@@ -9,10 +9,25 @@ namespace Microsoft.AspNet.Mvc
 {
     public class ActionDescriptor
     {
+        private readonly Guid _guid;
+
         public ActionDescriptor()
         {
             Properties = new Dictionary<object, object>();
             RouteValueDefaults = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+            _guid = Guid.NewGuid();
+        }
+
+        /// <summary>
+        /// Gets an id which uniquely identifies the action.
+        /// It is of the format "<see cref="DisplayName"/>_<see cref="Guid"/>".
+        /// </summary>
+        public string Id
+        {
+            get
+            {
+                return string.Format("{0}_{1}", DisplayName, _guid.ToString());
+            }
         }
 
         public virtual string Name { get; set; }
