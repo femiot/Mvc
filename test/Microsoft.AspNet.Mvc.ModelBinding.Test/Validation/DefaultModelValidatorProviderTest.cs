@@ -102,12 +102,12 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
         {
             // Arrange
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var validatorProvider = TestModelValidatorProvider.CreateDefaultProvider();
+            var validatorProvider = TestClientModelValidatorProvider.CreateDefaultProvider();
 
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(RangeAttributeOnProperty),
                 nameof(RangeAttributeOnProperty.Property));
-            var context = new ModelValidatorProviderContext(metadata);
+            var context = new ClientValidatorProviderContext(metadata);
 
             // Act
             validatorProvider.GetValidators(context);
@@ -144,12 +144,12 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
         {
             // Arrange
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var validatorProvider = TestModelValidatorProvider.CreateDefaultProvider();
+            var validatorProvider = TestClientModelValidatorProvider.CreateDefaultProvider();
 
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(ProductViewModel),
                 nameof(ProductViewModel.Id));
-            var context = new ModelValidatorProviderContext(metadata);
+            var context = new ClientValidatorProviderContext(metadata);
 
             // Act
             validatorProvider.GetValidators(context);
@@ -165,12 +165,12 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
         {
             // Arrange
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var validatorProvider = TestModelValidatorProvider.CreateDefaultProvider();
+            var validatorProvider = TestClientModelValidatorProvider.CreateDefaultProvider();
 
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(ProductViewModel),
                 nameof(ProductViewModel.Name));
-            var context = new ModelValidatorProviderContext(metadata);
+            var context = new ClientValidatorProviderContext(metadata);
 
             // Act
             validatorProvider.GetValidators(context);

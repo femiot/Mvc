@@ -32,6 +32,7 @@ namespace Microsoft.AspNet.Mvc
             ValidationExcludeFilters = new List<IExcludeTypeValidationFilter>();
             ModelMetadataDetailsProviders = new List<IMetadataDetailsProvider>();
             ModelValidatorProviders = new List<IModelValidatorProvider>();
+            ClientModelValidatorProviders = new List<IClientModelValidatorProvider>();
             CacheProfiles = new Dictionary<string, CacheProfile>(StringComparer.OrdinalIgnoreCase);
         }
 
@@ -113,6 +114,12 @@ namespace Microsoft.AspNet.Mvc
         /// Gets a list of <see cref="IModelValidatorProvider"/>s used by this application.
         /// </summary>
         public IList<IModelValidatorProvider> ModelValidatorProviders { get; }
+
+        /// <summary>
+        /// Gets a list of <see cref="IClientModelValidatorProvider"/>s used by 
+        /// <see cref="ModelBinding.Validation.CompositeClientModelValidatorProvider"/>.
+        /// </summary>
+        public IList<IClientModelValidatorProvider> ClientModelValidatorProviders { get; set; }
 
         /// <summary>
         /// Gets a list of descriptors that represent <see cref="Rendering.IViewEngine"/> used

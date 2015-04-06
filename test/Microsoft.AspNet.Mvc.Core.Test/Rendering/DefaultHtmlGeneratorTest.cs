@@ -584,10 +584,13 @@ namespace Microsoft.AspNet.Mvc.Rendering
                 mvcOptionsAccessor.Object,
                 htmlEncoder,
                 dataOptionsAccessor.Object);
-
+            var optionsAccessor = new Mock<IOptions<MvcOptions>>();
+            optionsAccessor
+                .SetupGet(o => o.Options)
+                .Returns(new MvcOptions());
             return new DefaultHtmlGenerator(
                 antiForgery,
-                Mock.Of<IScopedInstance<ActionBindingContext>>(),
+                optionsAccessor.Object,
                 metadataProvider,
                 Mock.Of<IUrlHelper>(),
                 htmlEncoder);
