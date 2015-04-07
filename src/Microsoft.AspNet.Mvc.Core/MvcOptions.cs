@@ -116,8 +116,7 @@ namespace Microsoft.AspNet.Mvc
         public IList<IModelValidatorProvider> ModelValidatorProviders { get; }
 
         /// <summary>
-        /// Gets a list of <see cref="IClientModelValidatorProvider"/>s used by 
-        /// <see cref="ModelBinding.Validation.CompositeClientModelValidatorProvider"/>.
+        /// Gets a list of <see cref="IClientModelValidatorProvider"/> instances.
         /// </summary>
         public IList<IClientModelValidatorProvider> ClientModelValidatorProviders { get; set; }
 

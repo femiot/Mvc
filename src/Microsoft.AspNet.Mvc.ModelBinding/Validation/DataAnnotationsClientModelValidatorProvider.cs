@@ -50,56 +50,53 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
 
         private static Dictionary<Type, DataAnnotationsClientModelValidationFactory> BuildAttributeFactoriesDictionary()
         {
-            var dict = new Dictionary<Type, DataAnnotationsClientModelValidationFactory>();
-            AddValidationAttributeAdapter(dict, typeof(RegularExpressionAttribute),
-                (attribute) => new RegularExpressionAttributeAdapter((RegularExpressionAttribute)attribute));
-
-            AddValidationAttributeAdapter(dict, typeof(MaxLengthAttribute),
-                (attribute) => new MaxLengthAttributeAdapter((MaxLengthAttribute)attribute));
-
-            AddValidationAttributeAdapter(dict, typeof(MinLengthAttribute),
-                (attribute) => new MinLengthAttributeAdapter((MinLengthAttribute)attribute));
-
-            AddValidationAttributeAdapter(dict, typeof(CompareAttribute),
-                (attribute) => new CompareAttributeAdapter((CompareAttribute)attribute));
-
-            AddValidationAttributeAdapter(dict, typeof(RequiredAttribute),
-                (attribute) => new RequiredAttributeAdapter((RequiredAttribute)attribute));
-
-            AddValidationAttributeAdapter(dict, typeof(RangeAttribute),
-                (attribute) => new RangeAttributeAdapter((RangeAttribute)attribute));
-
-            AddValidationAttributeAdapter(dict, typeof(StringLengthAttribute),
-                (attribute) => new StringLengthAttributeAdapter((StringLengthAttribute)attribute));
-
-            AddDataTypeAttributeAdapter(dict, typeof(CreditCardAttribute), "creditcard");
-            AddDataTypeAttributeAdapter(dict, typeof(EmailAddressAttribute), "email");
-            AddDataTypeAttributeAdapter(dict, typeof(PhoneAttribute), "phone");
-            AddDataTypeAttributeAdapter(dict, typeof(UrlAttribute), "url");
-
-            return dict;
-        }
-
-        private static void AddValidationAttributeAdapter(
-            Dictionary<Type, DataAnnotationsClientModelValidationFactory> dictionary,
-            Type validationAttributeType,
-            DataAnnotationsClientModelValidationFactory factory)
-        {
-            if (validationAttributeType != null)
+            return new Dictionary<Type, DataAnnotationsClientModelValidationFactory>()
             {
-                dictionary.Add(validationAttributeType, factory);
-            }
-        }
-
-        private static void AddDataTypeAttributeAdapter(
-            Dictionary<Type, DataAnnotationsClientModelValidationFactory> dictionary,
-            Type attributeType,
-            string ruleName)
-        {
-            AddValidationAttributeAdapter(
-                dictionary,
-                attributeType,
-                (attribute) => new DataTypeAttributeAdapter((DataTypeAttribute)attribute, ruleName));
+                {
+                    typeof(RegularExpressionAttribute),
+                    (attribute) => new RegularExpressionAttributeAdapter((RegularExpressionAttribute)attribute)
+                },
+                {
+                    typeof(MaxLengthAttribute),
+                    (attribute) => new MaxLengthAttributeAdapter((MaxLengthAttribute)attribute)
+                },
+                {
+                    typeof(MinLengthAttribute),
+                    (attribute) => new MinLengthAttributeAdapter((MinLengthAttribute)attribute)
+                },
+                {
+                    typeof(CompareAttribute),
+                    (attribute) => new CompareAttributeAdapter((CompareAttribute)attribute)
+                },
+                {
+                    typeof(RequiredAttribute),
+                    (attribute) => new RequiredAttributeAdapter((RequiredAttribute)attribute)
+                },
+                {
+                    typeof(RangeAttribute),
+                    (attribute) => new RangeAttributeAdapter((RangeAttribute)attribute)
+                },
+                {
+                    typeof(StringLengthAttribute),
+                    (attribute) => new StringLengthAttributeAdapter((StringLengthAttribute)attribute)
+                },
+                {
+                    typeof(CreditCardAttribute),
+                    (attribute) => new DataTypeAttributeAdapter((DataTypeAttribute)attribute, "creditcard")
+                },
+                {
+                    typeof(EmailAddressAttribute),
+                    (attribute) => new DataTypeAttributeAdapter((DataTypeAttribute)attribute, "email")
+                },
+                {
+                    typeof(PhoneAttribute),
+                    (attribute) => new DataTypeAttributeAdapter((DataTypeAttribute)attribute, "phone")
+                },
+                {
+                    typeof(UrlAttribute),
+                    (attribute) => new DataTypeAttributeAdapter((DataTypeAttribute)attribute, "url")
+                }
+            };
         }
     }
 }
