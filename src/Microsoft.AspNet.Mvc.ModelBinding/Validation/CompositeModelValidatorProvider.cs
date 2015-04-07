@@ -7,9 +7,9 @@ using Microsoft.Framework.Internal;
 namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
 {
     /// <summary>
-    /// Default implementation for <see cref="ICompositeModelValidatorProvider"/>.
+    /// Aggregate of <see cref="IModelValidatorProvider"/>s that delegates to its underlying providers.
     /// </summary>
-    public class CompositeModelValidatorProvider : ICompositeModelValidatorProvider
+    public class CompositeModelValidatorProvider
     {
         /// <summary>
         /// Initializes a new instance of <see cref="CompositeModelValidatorProvider"/>.
