@@ -116,7 +116,22 @@ namespace ModelBindingWebSite.Controllers
     public class WrapperUser
     {
         [FromBody]
-        public User User { get; set; }
+        public int IntU { get; set; }
+        public TestUser User { get; set; }
+    }
+
+    public class TestUser
+    {
+        [Required]
+        public int IntProp { get; set; }
+
+        [Required]
+        public string StringProp { get; set; }
+
+        public int Id { get; set; }
+
+        [Required]
+        public int MyProperty { get; set; }
     }
     
     public class SelfishPerson

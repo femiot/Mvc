@@ -84,7 +84,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
             // However for a null model key is non empty to ensure that the model name is used as a prefix for validation.
             return new ModelBindingResult(
                 model,
-                key: model == null ? bindingContext.ModelName : string.Empty,
+                key: "",
                 isModelSet: true);
         }
 

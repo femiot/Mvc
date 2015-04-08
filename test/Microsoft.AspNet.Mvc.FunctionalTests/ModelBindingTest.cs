@@ -69,7 +69,7 @@ namespace Microsoft.AspNet.Mvc.FunctionalTests
             var client = server.CreateClient();
 
             // Make sure the body object gets created with an invalid zip.
-            var content = new StringContent("{Key:123}", Encoding.UTF8, "application/json");
+            var content = new StringContent("{123}", Encoding.UTF8, "application/json");
 
             // Act
             var response = await client.PostAsync(
