@@ -21,10 +21,6 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
         internal delegate IClientModelValidator
             DataAnnotationsClientModelValidationFactory(ValidationAttribute attribute);
 
-        // Factories for validation attributes
-        private static readonly DataAnnotationsClientModelValidationFactory _defaultAttributeFactory =
-            (attribute) => new DataAnnotationsClientModelValidator(attribute);
-
         private readonly Dictionary<Type, DataAnnotationsClientModelValidationFactory> _attributeFactories =
             BuildAttributeFactoriesDictionary();
 
@@ -38,13 +34,21 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
         {
             foreach (var attribute in context.ValidatorMetadata.OfType<ValidationAttribute>())
             {
+                IClientModelValidator validator;
                 DataAnnotationsClientModelValidationFactory factory;
-                if (!_attributeFactories.TryGetValue(attribute.GetType(), out factory))
+                if (_attributeFactories.TryGetValue(attribute.GetType(), out factory))
                 {
-                    factory = _defaultAttributeFactory;
+                    validator = factory(attribute);
+                }
+                else
+                {
+                    validator = attribute as IClientModelValidator;
                 }
 
-                context.Validators.Add(factory(attribute));
+                if (validator != null)
+                {
+                    context.Validators.Add(validator);
+                }
             }
         }
 

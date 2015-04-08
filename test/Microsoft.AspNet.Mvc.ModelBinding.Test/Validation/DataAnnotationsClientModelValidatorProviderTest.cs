@@ -14,7 +14,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
         private readonly IModelMetadataProvider _metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
 
         [Fact]
-        public void GetValidators_DoesNotAddRequiredAttribute_ForNonNullableValueTypes_IfAttributeIsSpecifiedExplicitly()
+        public void GetValidators_DoesNotAddRequiredAttribute_IfAttributeIsSpecifiedExplicitly()
         {
             // Arrange
             var provider = new DataAnnotationsClientModelValidatorProvider();
@@ -132,7 +132,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
 
             // Assert
             var validator = providerContext.Validators.Single();
-            Assert.IsType<DataAnnotationsClientModelValidator>(validator);
+            Assert.IsType<DataAnnotationsClientModelValidator<RequiredAttribute>>(validator);
         }
 
         private class DummyValidationAttribute : ValidationAttribute
