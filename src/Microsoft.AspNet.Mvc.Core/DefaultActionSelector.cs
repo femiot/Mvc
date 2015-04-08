@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc.ActionConstraints;
-using Microsoft.AspNet.Mvc.Logging;
 using Microsoft.AspNet.Mvc.Routing;
 using Microsoft.AspNet.Routing;
 using Microsoft.Framework.Internal;
@@ -153,6 +152,14 @@ namespace Microsoft.AspNet.Mvc.Core
                             if (!constraint.Accept(constraintContext))
                             {
                                 isMatch = false;
+
+                                _logger.LogVerbose(
+                                    "Action '{ActionDisplayName}' with id '{ActionId}' did not match the " +
+                                    "constraint '{ActionConstraint}'", 
+                                    candidate.Action.DisplayName,
+                                    candidate.Action.Id,
+                                    constraint);
+
                                 break;
                             }
                         }

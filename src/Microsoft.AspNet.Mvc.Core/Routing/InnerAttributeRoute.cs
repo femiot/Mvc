@@ -101,6 +101,8 @@ namespace Microsoft.AspNet.Mvc.Routing
         /// <inheritdoc />
         public async Task RouteAsync([NotNull] RouteContext context)
         {
+            _logger.LogVerbose("Verifying request match with attribute routes.");
+
             foreach (var route in _matchingRoutes)
             {
                 var oldRouteData = context.RouteData;
