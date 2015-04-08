@@ -119,7 +119,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
         }
 
         [Fact]
-        public void UnknownValidationAttributeGetsDefaultAdapter()
+        public void UnknownValidationAttribute_DoNotGetAdded()
         {
             // Arrange
             var provider = new DataAnnotationsClientModelValidatorProvider();
@@ -131,8 +131,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
             provider.GetValidators(providerContext);
 
             // Assert
-            var validator = providerContext.Validators.Single();
-            Assert.IsType<DataAnnotationsClientModelValidator<RequiredAttribute>>(validator);
+            Assert.Empty(providerContext.Validators);
         }
 
         private class DummyValidationAttribute : ValidationAttribute

@@ -73,6 +73,7 @@ namespace Microsoft.AspNet.Mvc
             options.ModelValidatorProviders.Add(new DataAnnotationsModelValidatorProvider());
 
             // Set up client validators
+            options.ClientModelValidatorProviders.Add(new DefaultClientModelValidatorProvider());
             options.ClientModelValidatorProviders.Add(new DataAnnotationsClientModelValidatorProvider());
 
             // Add types to be excluded from Validation

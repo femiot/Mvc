@@ -10,10 +10,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
 {
     /// <summary>
     /// An implementation of <see cref="IClientModelValidatorProvider"/> which providers client validators
-    /// for attributes which derive from <see cref="ValidationAttribute"/>. It also provides
-    /// a validator for types which implement <see cref="IClientModelValidator"/>.
-    /// The logic to support <see cref="IClientModelValidator"/>
-    /// is implemented in <see cref="DataAnnotationsClientModelValidator"/>.
+    /// for attributes which derive from <see cref="ValidationAttribute"/>.
     /// </summary>
     public class DataAnnotationsClientModelValidatorProvider : IClientModelValidatorProvider
     {

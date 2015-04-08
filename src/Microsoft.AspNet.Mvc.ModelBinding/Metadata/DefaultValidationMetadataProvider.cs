@@ -19,6 +19,11 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Metadata
             {
                 context.ValidationMetadata.ValiatorMetadata.Add(attribute);
             }
+
+            foreach (var attribute in context.Attributes.OfType<IClientModelValidator>())
+            {
+                context.ValidationMetadata.ValiatorMetadata.Add(attribute);
+            }
         }
     }
 }

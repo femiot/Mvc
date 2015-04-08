@@ -11,9 +11,10 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
     public class ClientValidatorProviderContext
     {
         /// <summary>
-        /// Creates a new <see cref="ClientModelValidationContext"/>.
+        /// Creates a new <see cref="ClientValidatorProviderContext"/>.
         /// </summary>
-        /// <param name="modelMetadata">The <see cref="ModelBinding.ModelMetadata"/>.</param>
+        /// <param name="modelMetadata">The <see cref="ModelBinding.ModelMetadata"/> for the model being validated.
+        /// </param>
         public ClientValidatorProviderContext(ModelMetadata modelMetadata)
         {
             ModelMetadata = modelMetadata;
@@ -41,7 +42,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
         /// <summary>
         /// Gets the list of <see cref="IClientModelValidator"/> instances. <see cref="IClientModelValidatorProvider"/>
         /// instances should add validators to this list when
-        /// <see cref="IClientModelValidatorProvider.GetValidators(ClientValidatorProviderContext)"/>
+        /// <see cref="IClientModelValidatorProvider.GetValidators()"/>
         /// is called.
         /// </summary>
         public IList<IClientModelValidator> Validators { get; } = new List<IClientModelValidator>();

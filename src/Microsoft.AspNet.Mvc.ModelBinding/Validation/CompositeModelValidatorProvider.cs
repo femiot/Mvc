@@ -9,7 +9,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Validation
     /// <summary>
     /// Aggregate of <see cref="IModelValidatorProvider"/>s that delegates to its underlying providers.
     /// </summary>
-    public class CompositeModelValidatorProvider
+    public class CompositeModelValidatorProvider : IModelValidatorProvider
     {
         /// <summary>
         /// Initializes a new instance of <see cref="CompositeModelValidatorProvider"/>.
