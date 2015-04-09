@@ -9,13 +9,13 @@ namespace Microsoft.AspNet.Mvc
 {
     public class ActionDescriptor
     {
-        private readonly Guid _guid;
+        private readonly string _guid;
 
         public ActionDescriptor()
         {
             Properties = new Dictionary<object, object>();
             RouteValueDefaults = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-            _guid = Guid.NewGuid();
+            _guid = Guid.NewGuid().ToString();
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Microsoft.AspNet.Mvc
         {
             get
             {
-                return string.Format("{0}_{1}", DisplayName, _guid.ToString());
+                return string.Format("{0}_{1}", DisplayName, _guid);
             }
         }
 
